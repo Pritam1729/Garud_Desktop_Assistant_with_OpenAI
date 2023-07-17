@@ -7,6 +7,7 @@ import pyttsx3
 import webbrowser
 import datetime
 import subprocess,os
+from sitesfile import sites
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -42,11 +43,7 @@ if __name__ == '__main__':
         text = takeCommand()
         text = text.lower();
         # say(text)
-        sites = [
-            ["youtube","https://www.youtube.com"],
-            ["wikipedia","https://wikipedia.com"],
-            ["google","https://google.com"],
-        ]
+        
         for site in sites :
             if f"open {site[0]}" in text.lower():
                 say(f"Opening {site[0]} sir...")
