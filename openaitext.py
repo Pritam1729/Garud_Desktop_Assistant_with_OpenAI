@@ -1,8 +1,8 @@
 import os
 import openai
-from config import apikey
+from config import openai_apikey
 
-openai.api_key = apikey
+openai.api_key = openai_apikey
 
 response = openai.Completion.create(
   model="text-davinci-003",

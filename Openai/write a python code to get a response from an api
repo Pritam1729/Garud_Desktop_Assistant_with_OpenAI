@@ -1,0 +1,26 @@
+OpenAi response for garuda using artificial intelligence write a python code to get a response from an api
+
+import requests
+import json
+
+url = 'api_url_here'
+
+headers = {
+    'api_key' : '123456',
+    'Content-Type' : 'application/json'
+}
+
+post_data = {
+    'input': 'Hello, how can I help you?',
+    'context': {
+        '1': 'Some context'
+    }
+}
+
+response = requests.post(url, data=json.dumps(post_data), headers=headers)
+
+if response.status_code == 200:
+    data = response.json()
+    print(data['output'])
+else:
+    print('Someone has screwed up the API call!')

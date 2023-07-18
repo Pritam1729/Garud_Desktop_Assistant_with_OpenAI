@@ -8,7 +8,8 @@ import webbrowser
 import datetime
 import subprocess,os
 from sitesfile import sites
-from config import apikey
+from config import openai_apikey
+from weatherapi import get_Weather
 import random
 
 male = 1
@@ -30,7 +31,7 @@ def changeVoice():
 
 
 def ai(text):
-    openai.api_key = apikey
+    openai.api_key = openai_apikey
     prompt = f"OpenAi response for {text}"
     try:
         response = openai.Completion.create(
@@ -57,7 +58,7 @@ def ai(text):
 
 def chat(query):
     global chatstr
-    openai.api_key = apikey
+    openai.api_key = openai_apikey
     chatstr += f"Pritam: {query}\n Garuda(An AI created by Pritam): "
     try:
         response = openai.Completion.create(
@@ -72,12 +73,6 @@ def chat(query):
         res = response['choices'][0]['text']
         chatstr += f"{res}\n"
         return res
-        
-        # if not os.path.exists("Openai"):
-        #     os.mkdir("Openai")
-            
-        # with open(f"Openai/{' '.join(text.split('intelligence')[1:]).strip()}","w") as f:
-        #     f.write(prompt)
             
     except:
         res = "cannot process data"
@@ -143,6 +138,10 @@ if __name__ == '__main__':
         elif "now stop" in text:
             say("Garuda exiting Thank you")
             break
+        
+        elif "weather" in text:
+            ans = get_Weather()
+            say(ans)
         
         elif "using artificial intelligence" in text:
             prompt = ai(text)
